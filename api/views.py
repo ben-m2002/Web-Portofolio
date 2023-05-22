@@ -12,7 +12,6 @@ from rest_framework import status
 # Create your views here.
 
 
-
 class ArticleListView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
