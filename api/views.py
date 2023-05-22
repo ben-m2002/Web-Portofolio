@@ -6,21 +6,25 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework import mixins
+from rest_framework import viewsets
 from rest_framework import status
 
 
 # Create your views here.
 
-
-class ArticleListView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
-    def get(self, request):
-        return self.list(request)
-
-    def post(self, request):
-        return self.create(request)
+# class ArticleListView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+#     queryset = Article.objects.all()
+#     serializer_class = ArticleSerializer
+#
+#     def get(self, request):
+#         return self.list(request)
+#
+#     def post(self, request):
+#         return self.create(request)
 
 
 class ArticleDetailView(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
