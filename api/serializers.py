@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Article
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 import requests
 
 # normal django way to serialize
@@ -42,5 +43,12 @@ class UserSerializer (serializers.ModelSerializer):
             'password' : validated_data.get("password")
         }
         response = requests.post("http://localhost:8000/API/token", json = data)
+        if response.ok:
+            json_data = response.json()
+            access = json_data.get("access")
+            refresh = json_data.get("refresh")
+            response_toClient = JsonResponse({'user_id' : user.id})
+            response_toClient.set_cookie("access", access, max_age = 300, secure = False, httponly = True)
+            response_toClient.set_cookie("refresh", refresh, max_age = 86400, secure = False, httponly = True)
         return user
 
