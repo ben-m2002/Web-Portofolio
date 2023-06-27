@@ -1,9 +1,11 @@
 from django.shortcuts import render, HttpResponse
 from .models import Article
+from .models import Project
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from .serializers import ArticleSerializer
 from .serializers import UserSerializer
+from .serializers import ProjectSerializer
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework import generics
@@ -26,6 +28,10 @@ class ArticleViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class ProjectViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
 
 # class ArticleListView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
 #     queryset = Article.objects.all()

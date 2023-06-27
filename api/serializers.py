@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Article
+from .models import Project
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 import requests
@@ -23,7 +24,10 @@ class ArticleSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "description"]
 
 
-
+class ProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = ["id", "title", "description", "image", "date"]
 
 class UserSerializer (serializers.ModelSerializer):
     class Meta:
