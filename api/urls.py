@@ -9,10 +9,12 @@ router = routers.DefaultRouter()
 router.register(r'articles', ArticleViewSet)
 router.register(r'users', UserViewSet)
 router.register(r'projects', ProjectViewSet)
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("api/", include(router.urls)),
     path("API/token", TokenObtainPairView.as_view(), name = "token_obtain_pair_view"),
     path("API/token/refresh", TokenRefreshView.as_view(), name = 'token_refresh_view'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
