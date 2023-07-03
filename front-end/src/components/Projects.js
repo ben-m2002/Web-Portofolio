@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Container, Image, Row, Col, FormLabel, Card, Form} from 'react-bootstrap';
 import {useEffect, useState} from "react";
+import DJANGOPIC from "../resources/DJANGO.png";
 
 function Projects(props){
 
@@ -23,25 +24,28 @@ function Projects(props){
     }, [])
 
     return (
-        <Container style={{backgroundColor: '#303030', height: '100vh', paddingTop: '3rem', marginLeft :"1rem" }}>
-            <Row>
-                 <h1 style={{color : "white"}}>Projects Page</h1>
+        <Container style={{display : "flex", flexDirection: "column", backgroundColor: '#303030', height: '100vh', paddingTop: '3rem' }}>
+            <Row style={{alignItems : "center", justifyContent : "center"}}>
+                 <h1 style={{textAlign : "center", color : "white"}}>Projects Page</h1>
             </Row>
-            <Row>
-                {projectData && projectData.map((project, index) => (
-                <div key={index} style={{color : "white"}}>
-                    <Row>
-                        <Col xs = {4} sm = {4} md = {4} lg = {4}>
-                            <Image src={project.image} style={{ height : '200px', width: '200px'}} ></Image>
-                        </Col>
-                        <Col xs = {4} sm = {4} md = {4} lg = {4}>
-                             <h4>{project.projectName}</h4>
-                             <p>{project.description}</p>
-                        </Col>
-                    </Row>
+            <div style={{ marginTop: "2rem", backgroundColor: "#303030" }}>
+              {projectData && projectData.map((project, index) => (
+                <div key={index} style={{ color: "white", display: "inline-block", margin: "10px" }}>
+                  <Col xs={5} sm={5} md={5} lg={5}>
+                    <Card style={{ width: "25rem", border: "none", outline: "none" }}>
+                      <Card.Img variant="top" src={project.image} style={{ height: '150px', width: '100%', objectFit: 'cover' }} />
+                      <Card.Body style={{ backgroundColor: '#232222', color: "white" }}>
+                        <Card.Title style={{ fontSize: "20px", color: "white" }}>{project.projectName}</Card.Title>
+                        <Card.Subtitle style={{ fontSize: "12px", color: "gray" }}>About the project</Card.Subtitle>
+                        <Card.Text style={{ fontSize: "15px", color: "white", paddingTop: "10px" }}>
+                          {project.description}
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
                 </div>
-            ))}
-            </Row>
+             ))}
+            </div>
         </Container>
     )
 }
